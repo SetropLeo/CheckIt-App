@@ -1,0 +1,21 @@
+.input-container {
+  width: 400px;
+  height: 40px;
+  border: 1px solid #222326;
+}
+
+input {
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  font-size: 18px;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: 2px solid #01A601;
+  border: none;
+}
