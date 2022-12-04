@@ -1,0 +1,33 @@
+.createButton-container {
+  display: flex;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #222326;
+}
+
+.createButton-container:hover {
+  outline: none;
+}
+
+button {
+  width: 100%;
+  height: 100%;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:hover {
+  outline: 2px solid #01A601;
+  border: none;
+}
+
+button img {
+  height: 40px;
+}
+
