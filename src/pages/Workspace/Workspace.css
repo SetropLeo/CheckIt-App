@@ -1,0 +1,13 @@
+.workspace-container {
+  background-color: #1b1d20;
+  height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+}
+
+.input-btn-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-top: 60px;
+}
