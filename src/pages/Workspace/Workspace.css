@@ -10,4 +10,6 @@
   flex-direction: row;
   gap: 5px;
   margin-top: 60px;
+  width: calc(55%);
+  justify-content: center;
 }
