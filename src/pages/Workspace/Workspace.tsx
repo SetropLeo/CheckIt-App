@@ -1,6 +1,7 @@
 import React from 'react';
 import './Workspace.css';
-import { CreateButton, Input } from '../../components';
+import { Button, Input } from '../../components';
+const checkMark = require('../../images/checkmark.png');
 
 interface IWorkspaceProps {}
 
@@ -11,7 +12,7 @@ const Workspace: React.FC<IWorkspaceProps> = () => {
     setInputValue(value);
   };
 
-  const onClickCreateButton = () => {
+  const onClickAdd = () => {
     console.log('create');
   }
 
@@ -19,7 +20,7 @@ const Workspace: React.FC<IWorkspaceProps> = () => {
     <div className="workspace-container">
       <div className="input-btn-container">
       <Input inputValue={inputValue} onChange={onChangeInput} />
-      <CreateButton onClick={onClickCreateButton} />
+      <Button onClick={onClickAdd} borderColor={'#01A601'} btnImg={checkMark} />
       </div>
     </div>
   );

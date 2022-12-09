@@ -1,0 +1,1 @@
+export { EPropertyVariable } from './StyleEnum'
