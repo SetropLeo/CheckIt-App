@@ -1,1 +1,1 @@
-export { EPropertyVariable } from './StyleEnum'
+export { EPropertyVariable, EStyleColors } from './StyleEnum'
