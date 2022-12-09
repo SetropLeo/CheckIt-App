@@ -15,22 +15,27 @@ const Button: React.FC<IButtonProps> = ({
   btnText = 'Click',
   borderColor,
 }) => {
+  const [isHovering, setIsHovering] = React.useState(false);
 
-  const changeStyles = (): void => {
-    const root = document.documentElement;
+  const componentStyles = {
+    outline: isHovering ? `2px solid ${borderColor}` : '',
+  };
 
-    if (borderColor) {
-      root.style.setProperty(EPropertyVariable.BORDER_COLOR, borderColor)
-    } 
-  }
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+  };
 
-  React.useEffect(() => {
-    changeStyles();
-  }, [])
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+  };
 
   return (
-    <div className="createButton-container">
-      <button onClick={onClick}>
+    <div
+      className="createButton-container"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <button onClick={onClick} style={componentStyles}>
         {btnImg && <img src={btnImg} alt="Checkmark" />}
         {!btnImg && btnText && <span>{btnText}</span>}
       </button>
