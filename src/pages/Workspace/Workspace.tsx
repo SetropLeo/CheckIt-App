@@ -1,6 +1,10 @@
 import React from 'react';
 import './Workspace.css';
-import { CreateButton, Input } from '../../components';
+import { Button, Input } from '../../components';
+import { EStyleColors } from '../../enums';
+
+const sendIcon = require('../../images/send.png');
+const clearIcon = require('../../images/erase.png')
 
 interface IWorkspaceProps {}
 
@@ -11,15 +15,20 @@ const Workspace: React.FC<IWorkspaceProps> = () => {
     setInputValue(value);
   };
 
-  const onClickCreateButton = () => {
+  const onClickAdd = () => {
     console.log('create');
+  }
+
+  const onClickClear = () => {
+    console.log('clear');
   }
 
   return (
     <div className="workspace-container">
       <div className="input-btn-container">
       <Input inputValue={inputValue} onChange={onChangeInput} />
-      <CreateButton onClick={onClickCreateButton} />
+      <Button onClick={onClickAdd} borderColor={EStyleColors.GREEN} btnImg={sendIcon} />
+      <Button onClick={onClickClear} borderColor={EStyleColors.RED} btnImg={clearIcon} />
       </div>
     </div>
   );
