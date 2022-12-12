@@ -2,6 +2,10 @@
   width: 100%;
   height: 40px;
   border: 1px solid #222326;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 input {
@@ -15,6 +19,20 @@ input {
 }
 
 input:focus {
-  outline: 2px solid #01A601;
+  outline: 2px solid #01a601;
   border: none;
+}
+
+input:disabled {
+  background-color: #fff;
+  opacity: 0.5;
+}
+
+div.line {
+  background-color: #000;
+  width: calc(100% - 20px);
+  position: absolute;
+  height: 2px;
+  opacity: 0.5;
+  border-radius: 10px;
 }
