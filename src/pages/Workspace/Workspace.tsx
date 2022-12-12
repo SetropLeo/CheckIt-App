@@ -10,6 +10,7 @@ const clearIcon = require('../../images/erase.png');
 const Workspace: React.FC = () => {
   const [inputValue, setInputValue] = React.useState<string>('');
   const [cards, setCards] = React.useState<ICard[]>([]);
+
   const localStorageKey: string = 'checkit-cards';
 
   React.useEffect(() => {
@@ -18,15 +19,8 @@ const Workspace: React.FC = () => {
 
   const getCards = () => {
     const currentCards = localStorage.getItem(localStorageKey);
-
-    if (currentCards !== null && currentCards.length > 0) setCards(JSON.parse(currentCards));
-  };
-
-  const setNewCard = (newCard: ICard) => {
-    const newCards = [...cards, newCard];
-
-    localStorage.setItem(localStorageKey, JSON.stringify(newCards));
-    setCards(newCards);
+    if (currentCards !== null && currentCards.length > 0)
+      setCards(JSON.parse(currentCards));
   };
 
   const updateCards = (updatedCards: ICard[]) => {
@@ -41,7 +35,9 @@ const Workspace: React.FC = () => {
   const onClickAdd = (): void => {
     if (inputValue !== '') {
       const newCard = { value: inputValue, isCompleted: false };
-      setNewCard(newCard);
+      const newCardsList = [...cards, newCard]
+
+      updateCards(newCardsList);
       setInputValue('');
     }
   };
