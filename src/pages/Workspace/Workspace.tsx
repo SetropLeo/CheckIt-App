@@ -10,51 +10,58 @@ const clearIcon = require('../../images/erase.png');
 const Workspace: React.FC = () => {
   const [inputValue, setInputValue] = React.useState<string>('');
   const [cards, setCards] = React.useState<ICard[]>([]);
+  const localStorageKey: string = 'checkit-cards';
+
+  React.useEffect(() => {
+    getCards();
+  }, []);
+
+  const getCards = () => {
+    const currentCards = localStorage.getItem(localStorageKey);
+
+    if (currentCards !== null && currentCards.length > 0) setCards(JSON.parse(currentCards));
+  };
+
+  const setNewCard = (newCard: ICard) => {
+    const newCards = [...cards, newCard];
+
+    localStorage.setItem(localStorageKey, JSON.stringify(newCards));
+    setCards(newCards);
+  };
+
+  const updateCards = (updatedCards: ICard[]) => {
+    localStorage.setItem(localStorageKey, JSON.stringify(updatedCards));
+    setCards(updatedCards);
+  };
 
   const onChangeInput = (value: string): void => {
     setInputValue(value);
   };
 
   const onClickAdd = (): void => {
-    if (inputValue !== '')
-      setCards((cards: ICard[]) => [
-        ...cards,
-        { value: inputValue, isCompleted: false },
-      ]);
+    if (inputValue !== '') {
+      const newCard = { value: inputValue, isCompleted: false };
+      setNewCard(newCard);
+      setInputValue('');
+    }
+  };
 
-    setInputValue('');
+  const onClickCompleted = (index: number): void => {
+    const cardsUpdated = cards.map((card, cardIndex) => {
+      if (cardIndex === index) return { ...card, isCompleted: true };
+      else return card;
+    });
+    updateCards(cardsUpdated);
+  };
+
+  const onClickRemove = (index: number): void => {
+    const newCardsList = cards.filter((card, cardIndex) => cardIndex !== index);
+    updateCards(newCardsList);
   };
 
   const onClickClear = (): void => {
     setInputValue('');
   };
-
-  const onClickCompleted = (index: number): void => {
-    const cardsUpdated = cards.map((card, cardIndex) => {
-      if (cardIndex === index) {
-        return { ...card, isCompleted: true };
-      }
-      return card;
-    });
-    setCards(cardsUpdated);
-  };
-
-  const onClickRemove = (index: number): void => {
-    setCards((currentCards) =>
-      currentCards.filter((card, cardIndex) => cardIndex !== index),
-    );
-  };
-
-  const mappedCards = () =>
-    cards.map((card: ICard, index) => (
-      <Card
-        card={card}
-        cardIndex={index}
-        onClickCompleted={onClickCompleted}
-        onClickRemove={onClickRemove}
-        isReadonly={true}
-      />
-    ));
 
   return (
     <div className="workspace-container">
@@ -76,7 +83,18 @@ const Workspace: React.FC = () => {
             btnImg={clearIcon}
           />
         </div>
-        <div className="cards-container">{mappedCards()}</div>
+        <div className="cards-container">
+          {cards.map((card: ICard, index: number) => (
+            <Card
+              card={card}
+              cardIndex={index}
+              onClickCompleted={onClickCompleted}
+              onClickRemove={onClickRemove}
+              isReadonly={true}
+              key={index}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
